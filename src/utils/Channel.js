@@ -47,7 +47,9 @@ class Channel {
 
     // Server 消息监听
     dipatcher(msg) {
-        console.log(msg);
+        if (msg === undefined) {
+            return this.store.dispatch(ClientServer.disconnect());
+        }
         return this.store.dispatch(ClientServer.receiveMessage(msg));
     }
 }
