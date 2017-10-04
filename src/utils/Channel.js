@@ -1,6 +1,6 @@
 import Server from "./Server"
-import * as ClientServer from "./../actions/ClientServer"
-import {CONNECT, DISCONNECT, MESSAGE_POST} from "./../constants/ActionTypes"
+import * as ClientServer from "../actions/ClientServer"
+import {CONNECT, DISCONNECT, MESSAGE_POST} from "../constants/ActionTypes"
 
 class Channel {
     constructor(addr, store) {

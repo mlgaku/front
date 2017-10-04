@@ -4,7 +4,7 @@ import {connect} from "react-redux"
 
 import MsgList from "./MsgList"
 
-import * as ClientServer from "./../actions/ClientServer"
+import * as ClientServer from "../actions/ClientServer"
 
 const mapStateToProps = (state) => ({})
 const mapDispatchToProps = (dispatch) => ({

@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
 
-import {hide} from "./../actions/Register"
+import {hide} from "../actions/Register"
 
 import {
     Button, TextField, Dialog,

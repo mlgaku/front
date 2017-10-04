@@ -4,12 +4,12 @@ import {connect} from "react-redux"
 import {Grid, AppBar, Toolbar, Typography, Button, withStyles} from "material-ui"
 
 // 登录
-import Login from "./../containers/Login"
-import {show as showLogin} from "./../actions/Login"
+import Login from "../containers/Login"
+import {show as showLogin} from "../actions/Login"
 
 // 注册
-import Register from "./../containers/Register"
-import {show as showRegister} from "./../actions/Register"
+import Register from "../containers/Register"
+import {show as showRegister} from "../actions/Register"
 
 const mapStateToProps = (state) => ({})
 const mapDispatchToProps = (dispatch) => ({

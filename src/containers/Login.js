@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
 
-import {hide} from "./../actions/Login"
+import {hide} from "../actions/Login"
 
 import {
     Button, TextField, Dialog,

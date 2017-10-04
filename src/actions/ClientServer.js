@@ -1,7 +1,7 @@
 import {
     CONNECT, DISCONNECT,
     MESSAGE_POST, MESSAGE_RECEIVE
-} from "./../constants/ActionTypes"
+} from "../constants/ActionTypes"
 
 // 建立连接
 export const connect = () => ({type: CONNECT})

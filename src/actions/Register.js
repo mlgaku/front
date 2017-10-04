@@ -1,6 +1,6 @@
 import {
     REGISTER_SHOW, REGISTER_HIDE
-} from "./../constants/ActionTypes"
+} from "../constants/ActionTypes"
 
 // 显示注册模态框
 export const show = () => ({type: REGISTER_SHOW})

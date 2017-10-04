@@ -1,5 +1,5 @@
-import Message from "./../utils/Message"
-import {CONNECT, DISCONNECT, MESSAGE_RECEIVE} from "./../constants/ActionTypes"
+import Message from "../utils/Message"
+import {CONNECT, DISCONNECT, MESSAGE_RECEIVE} from "../constants/ActionTypes"
 
 const initialState = {
     // server 状态

@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 import Home from "./Home"
-// import Test from "./../containers/Test"
+// import Test from "../containers/Test"
 
 class App extends Component {
     render() {

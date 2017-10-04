@@ -1,6 +1,6 @@
 import {
     REGISTER_SHOW, REGISTER_HIDE
-} from "./../constants/ActionTypes"
+} from "../constants/ActionTypes"
 
 const initialState = {
     // 是否显示模态框
