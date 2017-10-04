@@ -1,12 +1,12 @@
 import Message from "./../utils/Message"
-import {CONNECT, DISCONNECT, RECEIVE_MESSAGE} from "./../constants/ActionTypes"
+import {CONNECT, DISCONNECT, MESSAGE_RECEIVE} from "./../constants/ActionTypes"
 
 const initialState = {
     // server 状态
     status: false,
     // server 响应
     response: []
-};
+}
 
 const test = (state = initialState, action) => {
     switch (action.type) {
@@ -22,7 +22,7 @@ const test = (state = initialState, action) => {
                 status: false
             }
 
-        case RECEIVE_MESSAGE:
+        case MESSAGE_RECEIVE:
             return {
                 ...state,
                 response: [...state.response, new Message(action.resp)]

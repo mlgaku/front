@@ -1,6 +1,6 @@
 import Server from "./Server"
 import * as ClientServer from "./../actions/ClientServer"
-import {CONNECT, DISCONNECT, POST_MESSAGE} from "./../constants/ActionTypes"
+import {CONNECT, DISCONNECT, MESSAGE_POST} from "./../constants/ActionTypes"
 
 class Channel {
     constructor(addr, store) {
@@ -38,7 +38,7 @@ class Channel {
                 return this.start()
             case DISCONNECT:
                 return this.stop()
-            case POST_MESSAGE:
+            case MESSAGE_POST:
                 return this.ser.postMessage(lastState.text)
             default:
                 return

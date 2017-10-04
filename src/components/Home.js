@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import {Grid, withStyles} from "material-ui"
 
-import Header from "./Header"
+import Header from "./../containers/Header"
 import Topic from "./Topic"
 import Sidebar from "./Sidebar"
 

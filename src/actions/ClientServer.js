@@ -1,6 +1,6 @@
 import {
     CONNECT, DISCONNECT,
-    POST_MESSAGE, RECEIVE_MESSAGE
+    MESSAGE_POST, MESSAGE_RECEIVE
 } from "./../constants/ActionTypes"
 
 // 建立连接
@@ -10,7 +10,7 @@ export const connect = () => ({type: CONNECT})
 export const disconnect = () => ({type: DISCONNECT})
 
 // 发出消息
-export const postMessage = (text) => ({type: POST_MESSAGE, text})
+export const postMessage = (text) => ({type: MESSAGE_POST, text})
 
 // 反馈消息
-export const receiveMessage = (resp) => ({type: RECEIVE_MESSAGE, resp})
+export const receiveMessage = (resp) => ({type: MESSAGE_RECEIVE, resp})
