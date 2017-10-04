@@ -1,8 +1,13 @@
-import React from "react"
-import Test from "./../containers/Test"
+import React, {Component} from "react"
+import Home from "./Home"
+// import Test from "./../containers/Test"
 
-const App = () => (
-    <Test />
-)
+class App extends Component {
+    render() {
+        return (
+            <Home />
+        )
+    }
+}
 
 export default App
