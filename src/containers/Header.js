@@ -2,12 +2,19 @@ import React, {Component} from "react"
 import {connect} from "react-redux"
 
 import {Grid, AppBar, Toolbar, Typography, Button, withStyles} from "material-ui"
+
+// 登录
 import Login from "./../containers/Login"
-import {show} from "./../actions/Login"
+import {show as showLogin} from "./../actions/Login"
+
+// 注册
+import Register from "./../containers/Register"
+import {show as showRegister} from "./../actions/Register"
 
 const mapStateToProps = (state) => ({})
 const mapDispatchToProps = (dispatch) => ({
-    showLogin: () => dispatch(show())
+    showLogin: () => dispatch(showLogin()),
+    showRegister: () => dispatch(showRegister())
 })
 
 const styles = theme => ({
@@ -43,7 +50,7 @@ class Header extends Component {
                                     <Button dense color="contrast">主题</Button>
                                     <Button dense color="contrast">节点</Button>
                                 </Typography>
-                                <Button dense color="contrast">注册</Button>
+                                <Button dense color="contrast" onClick={() => this.props.showRegister()}>注册</Button>
                                 <Button dense color="contrast" onClick={() => this.props.showLogin()}>登录</Button>
                             </Toolbar>
                         </Grid>
@@ -52,6 +59,9 @@ class Header extends Component {
 
                 {/* 登录模态框 */}
                 <Login />
+
+                {/* 注册模态框 */}
+                <Register />
             </div>
         )
     }
