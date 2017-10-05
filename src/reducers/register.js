@@ -1,10 +1,13 @@
 import {
-    REGISTER_SHOW, REGISTER_HIDE
+    REGISTER_SHOW, REGISTER_HIDE, REGISTER_SUBMIT, MESSAGE_RECEIVE
 } from "../constants/ActionTypes"
+import {unpack} from "../utils/Route"
 
 const initialState = {
     // 是否显示模态框
-    show: false
+    show: false,
+    // 提示信息
+    msg: "",
 }
 
 const register = (state = initialState, action) => {
@@ -22,6 +25,26 @@ const register = (state = initialState, action) => {
             return {
                 ...state,
                 show: false
+            }
+
+        // 收到消息
+        case MESSAGE_RECEIVE:
+            let body = unpack(REGISTER_SUBMIT, action.resp)
+            if (!body) {
+                return state
+            }
+
+            if (body.status === true) {
+                return {
+                    ...state,
+                    show: false,
+                    msg: "注册成功!",
+                }
+            }
+
+            return {
+                ...state,
+                msg: body.msg,
             }
 
         default:

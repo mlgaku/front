@@ -14,15 +14,16 @@ export default (data, rule, msg) => {
     }
 
     for (let [k, v] of entries(msg)) {
-        msg[k] = v.replace(/:name\s?/g, ":attribute")
+        msg[k] = v.replace(/\s?:name\s?/g, ":attribute")
     }
 
     const vali = new Validator(data, rule, msg)
     vali.setAttributeNames(name)
 
     if (vali.fails()) {
-        for (let x of values(vali.errors.all())) {
-            return x
+        const err = vali.errors.all()
+        for (let x in err) {
+            return err[x][0]
         }
     }
 }
