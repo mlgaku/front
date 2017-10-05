@@ -7,7 +7,7 @@ const initialState = {
     // 是否显示模态框
     show: false,
     // 是否已登录
-    logged: false,
+    logged: true,
     // 提示信息
     msg: "",
 }

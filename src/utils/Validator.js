@@ -1,7 +1,7 @@
 import Validator from "validatorjs"
 
 export default (data, rule, msg) => {
-    const {values, entries} = Object;
+    const {entries} = Object;
 
     const name = {}
     for (let [k, v] of entries(rule)) {

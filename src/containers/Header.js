@@ -4,14 +4,20 @@ import {connect} from "react-redux"
 import {Grid, AppBar, Toolbar, Typography, Button, withStyles} from "material-ui"
 
 // 登录
-import Login from "../containers/Login"
+import Login from "./Login"
 import {show as showLogin} from "../actions/Login"
 
 // 注册
-import Register from "../containers/Register"
+import Register from "./Register"
 import {show as showRegister} from "../actions/Register"
 
-const mapStateToProps = (state) => ({})
+// 已登录显示
+import Notice from "./Notice"
+import Myself from "./Myself"
+
+const mapStateToProps = (state) => ({
+    isLogin: state.login.logged
+})
 const mapDispatchToProps = (dispatch) => ({
     showLogin: () => dispatch(showLogin()),
     showRegister: () => dispatch(showRegister())
@@ -50,8 +56,19 @@ class Header extends Component {
                                     <Button dense color="contrast">主题</Button>
                                     <Button dense color="contrast">节点</Button>
                                 </Typography>
-                                <Button dense color="contrast" onClick={() => this.props.showRegister()}>注册</Button>
-                                <Button dense color="contrast" onClick={() => this.props.showLogin()}>登录</Button>
+                                {
+                                    this.props.isLogin ? (
+                                        <div>
+                                            <Notice />
+                                            <Myself />
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            <Button dense color="contrast" onClick={() => this.props.showRegister()}>注册</Button>
+                                            <Button dense color="contrast" onClick={() => this.props.showLogin()}>登录</Button>
+                                        </div>
+                                    )
+                                }
                             </Toolbar>
                         </Grid>
                     </Grid>
