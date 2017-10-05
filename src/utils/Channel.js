@@ -39,7 +39,7 @@ class Channel {
             case DISCONNECT:
                 return this.stop()
             case MESSAGE_POST:
-                return this.ser.postMessage(lastState.text)
+                return this.ser.postMessage(JSON.stringify(lastState.data))
             default:
                 return
         }
@@ -48,9 +48,9 @@ class Channel {
     // Server 消息监听
     dipatcher(msg) {
         if (msg === undefined) {
-            return this.store.dispatch(ClientServer.disconnect());
+            return this.store.dispatch(ClientServer.disconnect())
         }
-        return this.store.dispatch(ClientServer.receiveMessage(msg));
+        return this.store.dispatch(ClientServer.receiveMessage(JSON.parse(msg)))
     }
 }
 

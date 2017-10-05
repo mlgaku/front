@@ -9,10 +9,10 @@ import {
 } from "material-ui"
 
 const mapStateToProps = (state) => ({
-    register: state.register
+    register: state.register,
 })
 const mapDispatchToProps = (dispatch) => ({
-    hide: () => dispatch(hide())
+    hide: () => dispatch(hide()),
 })
 
 class Register extends Component {

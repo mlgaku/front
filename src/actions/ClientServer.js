@@ -10,7 +10,7 @@ export const connect = () => ({type: CONNECT})
 export const disconnect = () => ({type: DISCONNECT})
 
 // 发出消息
-export const postMessage = (text) => ({type: MESSAGE_POST, text})
+export const postMessage = (data) => ({type: MESSAGE_POST, data})
 
 // 反馈消息
 export const receiveMessage = (resp) => ({type: MESSAGE_RECEIVE, resp})
