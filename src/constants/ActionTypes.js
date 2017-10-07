@@ -9,6 +9,7 @@ export const MESSAGE_RECEIVE = "MESSAGE_RECEIVE"
 // 登录
 export const LOGIN_SHOW = "LOGIN_SHOW"
 export const LOGIN_HIDE = "LOGIN_HIDE"
+export const LOGIN_LOGOUT = "LOGIN_LOGOUT"
 export const LOGIN_SUBMIT = "LOGIN_SUBMIT"
 
 // 注册

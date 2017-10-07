@@ -12,16 +12,16 @@ const styles = theme => ({
 
 class Notice extends Component {
     state = {
-      anchorEl: null,
-      open: false,
+        open: false,
+        anchorEl: null,
     }
 
     handleClick = event => {
-      this.setState({ open: true, anchorEl: event.currentTarget })
+        this.setState({ open: true, anchorEl: event.currentTarget })
     }
 
     handleRequestClose = () => {
-      this.setState({ open: false })
+        this.setState({ open: false })
     }
 
     render () {
@@ -57,7 +57,6 @@ class Notice extends Component {
                 </Menu>
             </div>
         )
-
     }
 
 }

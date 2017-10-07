@@ -40,14 +40,11 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 class Register extends Component {
-    constructor () {
-        super()
-        this.state = {
-            msg: "",
-            name: "",
-            email: "",
-            password: "",
-        }
+    state = {
+        msg: "",
+        name: "",
+        email: "",
+        password: "",
     }
 
     render() {

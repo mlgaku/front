@@ -34,13 +34,10 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 class Login extends Component {
-    constructor () {
-        super()
-        this.state = {
-            msg: "",
-            name: "",
-            password: ""
-        }
+    state = {
+        msg: "",
+        name: "",
+        password: ""
     }
 
     render () {

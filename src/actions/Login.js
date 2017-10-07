@@ -1,5 +1,5 @@
 import {
-    LOGIN_SHOW, LOGIN_HIDE, LOGIN_SUBMIT, MESSAGE_POST
+    LOGIN_SHOW, LOGIN_HIDE, LOGIN_LOGOUT, LOGIN_SUBMIT, MESSAGE_POST
 } from "../constants/ActionTypes"
 import {pack} from "../utils/Route"
 
@@ -8,6 +8,9 @@ export const show = () => ({type: LOGIN_SHOW})
 
 // 隐藏登录模态框
 export const hide = () => ({type: LOGIN_HIDE})
+
+// 退出登录
+export const logout = () => ({type: LOGIN_LOGOUT})
 
 // 提交登录请求
 export const submit = (name, password) => {

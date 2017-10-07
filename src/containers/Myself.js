@@ -1,7 +1,15 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
+import {logout} from "../actions/Login"
 
 import {Avatar, IconButton, Menu, MenuItem, withStyles} from "material-ui"
+
+const mapStateToProps = (state) => ({
+    loginInfo: state.login.info,
+})
+const mapDispatchToProps = (dispatch) => ({
+    logout: () => dispatch(logout()),
+})
 
 const styles = theme => ({
     div: {
@@ -67,17 +75,17 @@ class Myself extends Component {
                             <Avatar src="/images/avatar.png" />
                         </IconButton>
                         <div style={{marginLeft: "10px"}}>
-                            <h3 className={classes.name}>学园麦乐</h3>
-                            <span className={classes.email}>mailegaku@gmail.com</span>
+                            <h3 className={classes.name}>{this.props.loginInfo.name}</h3>
+                            <span className={classes.email}>{this.props.loginInfo.email}</span>
                         </div>
                     </MenuItem>
                     <MenuItem key="balance" onClick={this.handleRequestClose}>余额</MenuItem>
                     <MenuItem key="setting" onClick={this.handleRequestClose}>设置</MenuItem>
-                    <MenuItem key="logout" onClick={this.handleRequestClose}>退出</MenuItem>
+                    <MenuItem key="logout" onClick={() => this.props.logout()}>退出</MenuItem>
                 </Menu>
             </div>
         )
     }
 }
 
-export default withStyles(styles)(Myself)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Myself))

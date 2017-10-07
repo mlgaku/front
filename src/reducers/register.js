@@ -4,10 +4,10 @@ import {
 import {unpack} from "../utils/Route"
 
 const initialState = {
-    // 是否显示模态框
-    show: false,
     // 提示信息
     msg: "",
+    // 是否显示模态框
+    show: false,
 }
 
 const register = (state = initialState, action) => {

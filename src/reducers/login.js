@@ -1,15 +1,17 @@
 import {
-    LOGIN_SHOW, LOGIN_HIDE, LOGIN_SUBMIT, MESSAGE_RECEIVE
+    LOGIN_SHOW, LOGIN_HIDE, LOGIN_LOGOUT, LOGIN_SUBMIT, MESSAGE_RECEIVE
 } from "../constants/ActionTypes"
 import {unpack} from "../utils/Route"
 
 const initialState = {
-    // 是否显示模态框
-    show: false,
-    // 是否已登录
-    logged: true,
     // 提示信息
     msg: "",
+    // 是否显示模态框
+    show: false,
+    // 登录信息
+    info: {},
+    // 是否已登录
+    logged: false,
 }
 
 const login = (state = initialState, action) => {
@@ -29,6 +31,13 @@ const login = (state = initialState, action) => {
                 show: false
             }
 
+        // 登出
+        case LOGIN_LOGOUT:
+            return {
+                ...state,
+                ...initialState
+            }
+
         // 收到消息
         case MESSAGE_RECEIVE:
             let body = unpack(LOGIN_SUBMIT, action.resp)
@@ -40,6 +49,7 @@ const login = (state = initialState, action) => {
                 return {
                     ...state,
                     show: false,
+                    info: body.data,
                     logged: true
                 }
             }
