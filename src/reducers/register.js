@@ -8,7 +8,7 @@ const initialState = {
     msg: "",
     // 是否显示模态框
     show: false,
-    // 用户名能否已注册
+    // 用户名是否已注册
     late: "",
 }
 

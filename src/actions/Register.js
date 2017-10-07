@@ -9,6 +9,7 @@ export const show = () => ({type: REGISTER_SHOW})
 // 隐藏注册模态框
 export const hide = () => ({type: REGISTER_HIDE})
 
+// 检查用户名是否已注册
 export const check = (name) => {
     return {
         type: MESSAGE_POST,

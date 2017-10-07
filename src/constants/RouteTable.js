@@ -1,11 +1,14 @@
 import {
-    LOGIN_SUBMIT, REGISTER_CHECK, REGISTER_SUBMIT, NODE_ADD
+    NODE_ADD, NODE_CHECK,
+    LOGIN_SUBMIT,
+    REGISTER_CHECK, REGISTER_SUBMIT,
 } from "./ActionTypes"
 
 // 正向
 let f = {
 
     [NODE_ADD]: {mod: "node", act: "add"},
+    [NODE_CHECK]: {mod: "node", act: "check"},
 
     [LOGIN_SUBMIT]: {mod: "user", act: "login"},
 

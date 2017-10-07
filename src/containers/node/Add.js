@@ -2,7 +2,7 @@ import React, {Component} from "react"
 import {connect} from "react-redux"
 import Validator from "../../utils/Validator"
 
-import {hide, add} from "../../actions/Node"
+import {hide, add, check} from "../../actions/Node"
 
 import {
     Button, TextField, Dialog, Snackbar,
@@ -17,6 +17,9 @@ const mapDispatchToProps = (dispatch) => ({
         this.setState({name: ""})
         dispatch(hide())
     },
+    check: function(name) {
+        dispatch(check(name))
+    },
     add: function () {
         const err = Validator(this.state, {
             "name^名称": "required|max:30|alpha_num",
@@ -26,8 +29,8 @@ const mapDispatchToProps = (dispatch) => ({
             max: ":name 不能大于 :min 位",
             alpha_num: ":name 只能为字母或数字",
         })
-        if (err) {
-            this.setState({msg: err})
+        if (err || this.props.node.late) {
+            this.setState({msg: err || this.props.node.late})
             return
         }
 
@@ -42,13 +45,23 @@ class Add extends Component {
         title: ""
     }
 
+    // 检查节点名是否存在
+    check(e) {
+        if (e.target.value !== "") {
+            this.props.check(e.target.value)
+        }
+    }
+
     render () {
         return (
             <div>
                 <Dialog open={this.props.node.show} onRequestClose={this.props.hide.bind(this)}>
                     <DialogTitle>加{this.props.node.parent ? "子" : "父"}节点</DialogTitle>
                     <DialogContent>
-                        <TextField margin="dense" onChange={e => this.setState({name: e.target.value})} label="名称" fullWidth autoFocus required />
+                        <TextField margin="dense" onChange={e => this.setState({name: e.target.value})} label="名称" fullWidth autoFocus required
+                            inputRef={e => e && e.addEventListener("blur", this.check.bind(this))}
+                            error={this.props.node.late !== ""} helperText={<span>{this.props.node.late}</span>}
+                        />
                         <TextField margin="dense" onChange={e => this.setState({title: e.target.value})} label="标题" fullWidth required />
                     </DialogContent>
                     <DialogActions>
