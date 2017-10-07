@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
 
+import {NavLink} from "react-router-dom"
 import {Grid, AppBar, Toolbar, Typography, Button, withStyles} from "material-ui"
 
 // 登录
@@ -34,9 +35,17 @@ const styles = theme => ({
     flex: {
         flex: 1,
     },
+    link: {
+        marginLeft: "6px",
+        textDecoration: "none",
+    },
+    active: {
+        display: "inline-block",
+        backgroundColor: "rgba(255, 255, 255, 0.12)",
+    },
     barColor: {
         backgroundColor: "#499ef3",
-    }
+    },
 })
 
 class Header extends Component {
@@ -52,9 +61,15 @@ class Header extends Component {
                             <Toolbar>
                                 <Typography type="title" color="inherit" className={classes.flex}>
                                     <img src="/images/logo.png" alt="logo" className={classes.logo} />
-                                    <Button dense color="contrast">首页</Button>
-                                    <Button dense color="contrast">主题</Button>
-                                    <Button dense color="contrast">节点</Button>
+                                    <NavLink to="/" className={classes.link} activeClassName={classes.active} exact>
+                                        <Button dense color="contrast">首页</Button>
+                                    </NavLink>
+                                    <NavLink to="/node" className={classes.link} activeClassName={classes.active}>
+                                        <Button dense color="contrast">节点</Button>
+                                    </NavLink>
+                                    <NavLink to="/rank" className={classes.link} activeClassName={classes.active}>
+                                        <Button dense color="contrast">排名榜</Button>
+                                    </NavLink>
                                 </Typography>
                                 {
                                     this.props.isLogin ? (
