@@ -2,7 +2,7 @@ import React, {Component} from "react"
 import {connect} from "react-redux"
 import Validator from "../utils/Validator"
 
-import {hide, submit} from "../actions/Register"
+import {hide, check, submit} from "../actions/Register"
 
 import {
     Button, TextField, Dialog, Snackbar,
@@ -17,6 +17,9 @@ const mapDispatchToProps = (dispatch) => ({
         this.setState({name: "", email: "", password: ""})
         dispatch(hide())
     },
+    check: function(name) {
+        dispatch(check(name))
+    },
     submit: function() {
         const err = Validator(this.state, {
             "name^用户名": "required|min:4|max:15|alpha_num",
@@ -30,8 +33,8 @@ const mapDispatchToProps = (dispatch) => ({
             max: ":name 不能大于 :min 位",
             alpha_num: ":name 只能为字母或数字",
         })
-        if (err) {
-            this.setState({msg: err})
+        if (err || this.props.register.late) {
+            this.setState({msg: err || this.props.register.late})
             return
         }
 
@@ -47,13 +50,23 @@ class Register extends Component {
         password: "",
     }
 
+    // 检查用户名是否被注册
+    check(e) {
+        if (e.target.value !== "") {
+            this.props.check(e.target.value)
+        }
+    }
+
     render() {
         return (
             <div>
                 <Dialog open={this.props.register.show} onRequestClose={this.props.hide.bind(this)}>
                     <DialogTitle>注册</DialogTitle>
                     <DialogContent>
-                        <TextField margin="dense" onChange={e => this.setState({name: e.target.value})} label="用户名" fullWidth autoFocus required />
+                        <TextField margin="dense" onChange={e => this.setState({name: e.target.value})} label="用户名" fullWidth autoFocus required
+                            inputRef={e => e && e.addEventListener("blur", this.check.bind(this))}
+                            error={this.props.register.late !== ""} helperText={<span>{this.props.register.late}</span>}
+                        />
                         <TextField margin="dense" onChange={e => this.setState({password: e.target.value})} label="密码" fullWidth type="password" required />
                         <TextField margin="dense" onChange={e => this.setState({email: e.target.value})} label="邮箱地址" fullWidth type="email" required />
                     </DialogContent>

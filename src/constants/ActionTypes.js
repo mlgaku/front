@@ -15,6 +15,7 @@ export const LOGIN_SUBMIT = "LOGIN_SUBMIT"
 // 注册
 export const REGISTER_SHOW = "REGISTER_SHOW"
 export const REGISTER_HIDE = "REGISTER_HIDE"
+export const REGISTER_CHECK = "REGISTER_CHECK"
 export const REGISTER_SUBMIT = "REGISTER_SUBMIT"
 
 // 节点

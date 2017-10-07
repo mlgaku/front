@@ -1,5 +1,5 @@
 import {
-    REGISTER_SHOW, REGISTER_HIDE, REGISTER_SUBMIT, MESSAGE_RECEIVE
+    REGISTER_SHOW, REGISTER_HIDE, REGISTER_CHECK, REGISTER_SUBMIT, MESSAGE_RECEIVE
 } from "../constants/ActionTypes"
 import {unpack} from "../utils/Route"
 
@@ -8,11 +8,12 @@ const initialState = {
     msg: "",
     // 是否显示模态框
     show: false,
+    // 用户名能否已注册
+    late: "",
 }
 
 const register = (state = initialState, action) => {
     switch (action.type) {
-
         // 显示
         case REGISTER_SHOW:
             return {
@@ -29,27 +30,45 @@ const register = (state = initialState, action) => {
 
         // 收到消息
         case MESSAGE_RECEIVE:
-            let body = unpack(REGISTER_SUBMIT, action.resp)
-            if (!body) {
-                return state
-            }
+            let body
 
-            if (body.status === true) {
+            // 检查用户名
+            body = unpack(REGISTER_CHECK, action.resp)
+            if (body) {
+                if (body.status === true) {
+                    return {
+                        ...state,
+                        late: ""
+                    }
+                }
+
                 return {
                     ...state,
-                    show: false,
-                    msg: "注册成功!",
+                    late: body.msg,
                 }
             }
 
-            return {
-                ...state,
-                msg: body.msg,
+            // 注册
+            body = unpack(REGISTER_SUBMIT, action.resp)
+            if (body) {
+                if (body.status === true) {
+                    return {
+                        ...state,
+                        show: false,
+                        msg: "注册成功!",
+                    }
+                }
+
+                return {
+                    ...state,
+                    msg: body.msg,
+                }
             }
+
+            return state
 
         default:
             return state
-
     }
 }
 
