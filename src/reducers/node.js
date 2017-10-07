@@ -1,74 +1,39 @@
 import {
-    NODE_SHOW_CHILD, NODE_HIDE_CHILD,
-    NODE_SHOW_PARENT, NODE_HIDE_PARENT,
-    LOGIN_SUBMIT, MESSAGE_RECEIVE
+    NODE_SHOW, NODE_HIDE,
+    NODE_ADD, MESSAGE_RECEIVE
 } from "../constants/ActionTypes"
 import {unpack} from "../utils/Route"
 
 const initialState = {
-    // 子节点
-    child: {
-        // 提示信息
-        msg: "",
-        // 是否显示模态框
-        show: false,
-    },
-
-    // 父节点
-    parent: {
-        // 提示信息
-        msg: "",
-        // 是否显示模态框
-        show: false,
-    },
+    // 提示信息
+    msg: "",
+    // 是否显示模态框
+    show: false,
+    // 欲添加节点的父节点
+    parent: null,
 }
 
 const node = (state = initialState, action) => {
     switch (action.type) {
 
-        // 显示子节点
-        case NODE_SHOW_CHILD:
+        // 显示添加节点
+        case NODE_SHOW:
             return {
                 ...state,
-                child: {
-                    ...state.child,
-                    show: true
-                }
+                show: true,
+                parent: action.parent
             }
 
-        // 隐藏子节点
-        case NODE_HIDE_CHILD:
+        // 隐藏添加节点
+        case NODE_HIDE:
             return {
                 ...state,
-                child: {
-                    ...state.child,
-                    show: false
-                }
-            }
-
-        // 显示父节点
-        case NODE_SHOW_PARENT:
-            return {
-                ...state,
-                parent: {
-                    ...state.parent,
-                    show: true
-                }
-            }
-
-        // 隐藏父节点
-        case NODE_HIDE_PARENT:
-            return {
-                ...state,
-                parent: {
-                    ...state.parent,
-                    show: false
-                }
+                show: false
             }
 
         // 收到消息
         case MESSAGE_RECEIVE:
-            let body = unpack(LOGIN_SUBMIT, action.resp)
+            let body = unpack(NODE_ADD, action.resp)
             if (!body) {
                 return state
             }
@@ -77,8 +42,7 @@ const node = (state = initialState, action) => {
                 return {
                     ...state,
                     show: false,
-                    info: body.data,
-                    logged: true
+                    msg: "添加成功!"
                 }
             }
 

@@ -18,7 +18,6 @@ export const REGISTER_HIDE = "REGISTER_HIDE"
 export const REGISTER_SUBMIT = "REGISTER_SUBMIT"
 
 // 节点
-export const NODE_SHOW_CHILD = "NODE_SHOW_CHILD"
-export const NODE_HIDE_CHILD = "NODE_HIDE_CHILD"
-export const NODE_SHOW_PARENT = "NODE_SHOW_PARENT"
-export const NODE_HIDE_PARENT = "NODE_HIDE_PARENT"
+export const NODE_SHOW = "NODE_SHOW"
+export const NODE_HIDE = "NODE_HIDE"
+export const NODE_ADD = "NODE_ADD"

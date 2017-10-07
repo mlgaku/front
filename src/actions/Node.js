@@ -1,24 +1,19 @@
 import {
-    NODE_SHOW_CHILD, NODE_HIDE_CHILD,
-    NODE_SHOW_PARENT, NODE_HIDE_PARENT,
-    LOGIN_SUBMIT, MESSAGE_POST
+    NODE_SHOW, NODE_HIDE,
+    NODE_ADD, MESSAGE_POST
 } from "../constants/ActionTypes"
 import {pack} from "../utils/Route"
 
-// 显示子节点模态框
-export const showChild = () => ({type: NODE_SHOW_CHILD})
-// 隐藏子节点模态框
-export const hideChild = () => ({type: NODE_HIDE_CHILD})
+// 显示添加节点
+export const show = (parent = null) => ({type: NODE_SHOW, parent})
 
-// 显示父节点模态框
-export const showParent = () => ({type: NODE_SHOW_PARENT})
-// 隐藏父节点模态框
-export const hideParent = () => ({type: NODE_HIDE_PARENT})
+// 隐藏添加节点
+export const hide = () => ({type: NODE_HIDE})
 
-// 提交登录请求
-export const submit = (name, password) => {
+// 添加节点
+export const add = (name, title, parent = null) => {
     return {
         type: MESSAGE_POST,
-        data: pack(LOGIN_SUBMIT, {name, password}),
+        data: pack(NODE_ADD, {name, title, parent}),
     }
 }

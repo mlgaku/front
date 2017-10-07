@@ -1,18 +1,16 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
-import {showChild, showParent} from "../../actions/Node"
+import {show} from "../../actions/Node"
 
 import {Button, IconButton, withStyles} from "material-ui"
 import AddIcon from "material-ui-icons/Add"
 
-import AddChild from "./AddChild"
-import AddParent from "./AddParent"
+import AddNode from "./Add"
 
 const mapStateToProps = (state) => ({
 })
 const mapDispatchToProps = (dispatch) => ({
-    showChild: () => dispatch(showChild()),
-    showParent: () => dispatch(showParent()),
+    show: (parent = null) => dispatch(show(parent)),
 })
 
 const styles = theme => ({
@@ -63,7 +61,7 @@ class List extends Component {
                     <div className={classes.body}>
                         <p className={classes.total}>共有 3 个父节点, 22 个子节点</p>
                     </div>
-                    <IconButton aria-label="Add" className={classes.add} onClick={() => this.props.showParent()}>
+                    <IconButton aria-label="Add" className={classes.add} onClick={() => this.props.show()}>
                         <AddIcon />
                     </IconButton>
                 </div>
@@ -75,7 +73,7 @@ class List extends Component {
                             <Button dense key={x} href="#" className={classes.item}>{x}</Button>
                         ))}
                     </div>
-                    <IconButton aria-label="Add" className={classes.add} onClick={() => this.props.showChild()}>
+                    <IconButton aria-label="Add" className={classes.add} onClick={() => this.props.show("aaaa")}>
                         <AddIcon />
                     </IconButton>
                 </div>
@@ -86,7 +84,7 @@ class List extends Component {
                             <Button dense key={x} href="#" className={classes.item}>{x}</Button>
                         ))}
                     </div>
-                    <IconButton aria-label="Add" className={classes.add} onClick={() => this.props.showChild()}>
+                    <IconButton aria-label="Add" className={classes.add} onClick={() => this.props.show("bbbb")}>
                         <AddIcon />
                     </IconButton>
                 </div>
@@ -97,16 +95,13 @@ class List extends Component {
                             <Button dense key={x} href="#" className={classes.item}>{x}</Button>
                         ))}
                     </div>
-                    <IconButton aria-label="Add" className={classes.add} onClick={() => this.props.showChild()}>
+                    <IconButton aria-label="Add" className={classes.add} onClick={() => this.props.show("cccc")}>
                         <AddIcon />
                     </IconButton>
                 </div>
 
-                {/* 添加子节点模态框 */}
-                <AddChild />
-
-                {/* 添加父节点模态框 */}
-                <AddParent />
+                {/* 添加节点模态框 */}
+                <AddNode />
             </div>
         )
     }
