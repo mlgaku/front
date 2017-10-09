@@ -4,11 +4,11 @@ import {connect} from "react-redux"
 
 import MsgList from "./MsgList"
 
-import * as ClientServer from "../actions/ClientServer"
+import * as Client from "../actions/Client"
 
 const mapStateToProps = (state) => ({})
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators(ClientServer, dispatch)
+    actions: bindActionCreators(Client, dispatch)
 })
 
 class Test extends Component {

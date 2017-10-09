@@ -1,16 +1,21 @@
-import test from "./test.js"
+import test from "./test"
 
-import node from "./node.js"
+import node from "./node"
 
-import login from "./login.js"
-import register from "./register.js"
+import login from "./login"
+import register from "./register"
 
-import lastState from "./lastState.js"
+import pubsub from "./pubsub"
+import lastState from "./lastState"
 
 export default {
     test,
+
     node,
+
     login,
     register,
+
+    pubsub,
     lastState,
 }

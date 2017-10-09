@@ -1,5 +1,6 @@
 import {
-    NODE_ADD, NODE_CHECK,
+    PUBSUB_ADD, PUBSUB_REMOVE,
+    NODE_ADD, NODE_CHECK, NODE_SUB, NODE_UNSUB,
     LOGIN_SUBMIT,
     REGISTER_CHECK, REGISTER_SUBMIT,
 } from "./ActionTypes"
@@ -7,8 +8,13 @@ import {
 // 正向
 let f = {
 
+    [PUBSUB_ADD]: {mod: "sub", act: "add"},
+    [PUBSUB_REMOVE]: {mod: "sub", act: "remove"},
+
     [NODE_ADD]: {mod: "node", act: "add"},
     [NODE_CHECK]: {mod: "node", act: "check"},
+    [NODE_SUB]: {mod: "node", act: "list"},
+    [NODE_UNSUB]: {mod: "node", act: "list"},
 
     [LOGIN_SUBMIT]: {mod: "user", act: "login"},
 

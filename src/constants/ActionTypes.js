@@ -1,10 +1,16 @@
 // 服务
+export const OPEN = "OPEN"
+export const CLOSE = "CLOSE"
 export const CONNECT = "CONNECT"
 export const DISCONNECT = "DISCONNECT"
 
 // 消息
 export const MESSAGE_POST = "MESSAGE_POST"
 export const MESSAGE_RECEIVE = "MESSAGE_RECEIVE"
+
+// 订阅
+export const PUBSUB_ADD = "PUBSUB_ADD"
+export const PUBSUB_REMOVE = "PUBSUB_REMOVE"
 
 // 登录
 export const LOGIN_SHOW = "LOGIN_SHOW"
@@ -22,4 +28,6 @@ export const REGISTER_SUBMIT = "REGISTER_SUBMIT"
 export const NODE_SHOW = "NODE_SHOW"
 export const NODE_HIDE = "NODE_HIDE"
 export const NODE_ADD = "NODE_ADD"
+export const NODE_SUB = "NODE_SUB"
+export const NODE_UNSUB = "NODE_UNSUB"
 export const NODE_CHECK = "NODE_CHECK"

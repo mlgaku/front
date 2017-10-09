@@ -1,6 +1,8 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
-import {show} from "../../actions/Node"
+import * as Node from "../../actions/Node"
+import * as Pubsub from "../../actions/Pubsub"
+import {NODE_SUB, NODE_UNSUB} from "../../constants/ActionTypes"
 
 import {Button, IconButton, withStyles} from "material-ui"
 import AddIcon from "material-ui-icons/Add"
@@ -10,7 +12,9 @@ import AddNode from "./Add"
 const mapStateToProps = (state) => ({
 })
 const mapDispatchToProps = (dispatch) => ({
-    show: (parent = null) => dispatch(show(parent)),
+    sub: () => dispatch(Pubsub.add(NODE_SUB)),
+    unsub: () => dispatch(Pubsub.remove(NODE_UNSUB)),
+    show: (parent = null) => dispatch(Node.show(parent)),
 })
 
 const styles = theme => ({
@@ -51,6 +55,17 @@ const styles = theme => ({
 })
 
 class List extends Component {
+
+    // 组件装载
+    componentWillMount() {
+        this.props.sub()
+    }
+
+    // 组件卸载
+    componentWillUnmount() {
+        this.props.unsub()
+    }
+
     render() {
         const classes = this.props.classes
 

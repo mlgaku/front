@@ -1,6 +1,7 @@
 import Server from "./Server"
-import * as ClientServer from "../actions/ClientServer"
-import {CONNECT, DISCONNECT, MESSAGE_POST} from "../constants/ActionTypes"
+import * as Client from "../actions/Client"
+import * as Pubsub from "../actions/Pubsub"
+import {OPEN, CLOSE, CONNECT, DISCONNECT, PUBSUB_ADD, MESSAGE_POST} from "../constants/ActionTypes"
 
 class Channel {
     constructor(addr, store) {
@@ -24,20 +25,34 @@ class Channel {
         this.ser = null
     }
 
-    // 触发 Server 连接
-    trigger() {
-        this.store.dispatch(ClientServer.connect())
-    }
-
     // Redux 消息监听
     listener() {
-        const {lastState} = this.store.getState()
+        const {pubsub, lastState} = this.store.getState()
 
         switch (lastState.type) {
+            case OPEN:
+                // 建立连接后订阅内容
+                for (let v of pubsub.list.values()) {
+                    pubsub.list.delete(v)
+                    this.store.dispatch(Pubsub.reg(JSON.parse(v)))
+                }
+                return
+            case CLOSE:
+                return
             case CONNECT:
                 return this.start()
             case DISCONNECT:
                 return this.stop()
+            case PUBSUB_ADD:
+                if (!this.ser.websocket.readyState) {
+                    return
+                }
+                // 有新的订阅时触发
+                for (let v of pubsub.list.values()) {
+                    pubsub.list.delete(v)
+                    this.store.dispatch(Pubsub.reg(JSON.parse(v)))
+                }
+                return
             case MESSAGE_POST:
                 return this.ser.postMessage(JSON.stringify(lastState.data))
             default:
@@ -46,11 +61,17 @@ class Channel {
     }
 
     // Server 消息监听
-    dipatcher(msg) {
-        if (msg === undefined) {
-            return this.store.dispatch(ClientServer.disconnect())
+    dipatcher(type, msg = null) {
+        switch (type) {
+            case "open":
+                return this.store.dispatch(Client.open())
+            case "close":
+                return this.store.dispatch(Client.close())
+            case "message":
+                return this.store.dispatch(Client.receiveMessage(JSON.parse(msg)))
+            default:
+                return
         }
-        return this.store.dispatch(ClientServer.receiveMessage(JSON.parse(msg)))
     }
 }
 

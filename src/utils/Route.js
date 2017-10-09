@@ -1,7 +1,7 @@
 import {forwa, rever} from "../constants/RouteTable"
 
 // 打包数据
-export const pack = (type, data = {}) => Object.assign(forwa[type], {
+export const pack = (type, data = null) => Object.assign(forwa[type], {
     body: JSON.stringify({...data})
 })
 

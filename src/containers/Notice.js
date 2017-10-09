@@ -1,5 +1,4 @@
 import React, {Component} from "react"
-import {connect} from "react-redux"
 
 import {IconButton, Menu, MenuItem, withStyles} from "material-ui"
 import NotificationsIcon from "material-ui-icons/Notifications"

@@ -11,11 +11,13 @@ import thunk from "redux-thunk"
 import reducers from "./reducers"
 // Channel
 import Channel from "./utils/Channel"
+import {connect} from "./actions/Client"
 // serviceWorker
 import registerServiceWorker from "./registerServiceWorker"
 
 const store = createStore(combineReducers(reducers), applyMiddleware(thunk))
-new Channel("127.0.0.1:8080", store).trigger()
+new Channel("127.0.0.1:8080", store)
+store.dispatch(connect())
 
 ReactDOM.render(
     <Provider store={store}>
