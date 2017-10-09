@@ -1,6 +1,6 @@
 import {
     PUBSUB_ADD, PUBSUB_REMOVE,
-    NODE_ADD, NODE_CHECK, NODE_SUB, NODE_UNSUB,
+    NODE_ADD, NODE_CHECK, NODE_SUB,
     LOGIN_SUBMIT,
     REGISTER_CHECK, REGISTER_SUBMIT,
 } from "./ActionTypes"
@@ -14,7 +14,6 @@ let f = {
     [NODE_ADD]: {mod: "node", act: "add"},
     [NODE_CHECK]: {mod: "node", act: "check"},
     [NODE_SUB]: {mod: "node", act: "list"},
-    [NODE_UNSUB]: {mod: "node", act: "list"},
 
     [LOGIN_SUBMIT]: {mod: "user", act: "login"},
 

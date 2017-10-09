@@ -2,7 +2,7 @@ import React, {Component} from "react"
 import {connect} from "react-redux"
 import * as Node from "../../actions/Node"
 import * as Pubsub from "../../actions/Pubsub"
-import {NODE_SUB, NODE_UNSUB} from "../../constants/ActionTypes"
+import {NODE_SUB} from "../../constants/ActionTypes"
 
 import {Button, IconButton, withStyles} from "material-ui"
 import AddIcon from "material-ui-icons/Add"
@@ -13,7 +13,7 @@ const mapStateToProps = (state) => ({
 })
 const mapDispatchToProps = (dispatch) => ({
     sub: () => dispatch(Pubsub.add(NODE_SUB)),
-    unsub: () => dispatch(Pubsub.remove(NODE_UNSUB)),
+    unsub: () => dispatch(Pubsub.remove(NODE_SUB)),
     show: (parent = null) => dispatch(Node.show(parent)),
 })
 
