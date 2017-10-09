@@ -1,6 +1,6 @@
 import {
     NODE_SHOW, NODE_HIDE,
-    NODE_ADD, NODE_CHECK,
+    NODE_ADD, NODE_CHECK, NODE_REMOVE,
     MESSAGE_POST
 } from "../constants/ActionTypes"
 import {pack} from "../utils/Route"
@@ -20,9 +20,13 @@ export const add = (name, title, parent = null) => {
 }
 
 // 检查节点名
-export const check = (name) => {
-    return {
-        type: MESSAGE_POST,
-        data: pack(NODE_CHECK, {name}),
-    }
-}
+export const check = (name) => ({
+    type: MESSAGE_POST,
+    data: pack(NODE_CHECK, {name}),
+})
+
+// 删除节点
+export const remove = (id) => ({
+    type: MESSAGE_POST,
+    data: pack(NODE_REMOVE, {id}),
+})
