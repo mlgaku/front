@@ -1,9 +1,10 @@
 import React, {Component} from "react"
 import {Grid, withStyles} from "material-ui"
 
-import Header from "./Header"
-import List from "./node/List"
-import Sidebar from "../components/Sidebar"
+import Header from "../containers/Header"
+import List from "../containers/node/List"
+import Topic from "../containers/node/Topic"
+import Sidebar from "./Sidebar"
 
 const styles = theme => ({
     left: {
@@ -32,8 +33,9 @@ class Node extends Component {
                         <Grid container spacing={0}>
                             {/* 左侧 */}
                             <Grid item xs={9} className={classes.left}>
-                                <List />
+                                {this.props.match.params.name ? <Topic name={this.props.match.params.name} /> : <List />}
                             </Grid>
+
                             {/* 右侧 */}
                             <Grid item xs={3} className={classes.right}>
                                 <Sidebar />

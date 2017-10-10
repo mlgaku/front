@@ -1,6 +1,7 @@
 import test from "./test"
 
 import node from "./node"
+import topic from "./topic"
 
 import login from "./login"
 import register from "./register"
@@ -12,6 +13,7 @@ export default {
     test,
 
     node,
+    topic,
 
     login,
     register,

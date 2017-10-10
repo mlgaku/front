@@ -7,6 +7,7 @@ import App from "./components/App"
 import {createStore, combineReducers, applyMiddleware} from "redux"
 import {Provider} from "react-redux"
 import thunk from "redux-thunk"
+import {routerReducer, routerMiddleware, syncHistoryWithStore} from "react-router-redux"
 // reducers
 import reducers from "./reducers"
 // Channel
@@ -14,14 +15,28 @@ import Channel from "./utils/Channel"
 import {connect} from "./actions/Client"
 // serviceWorker
 import registerServiceWorker from "./registerServiceWorker"
+// Router
+import {Router} from "react-router-dom"
+import History from "./components/History"
 
-const store = createStore(combineReducers(reducers), applyMiddleware(thunk))
+const store = createStore(combineReducers({
+    ...reducers,
+    routing: routerReducer
+}), applyMiddleware(
+    thunk,
+    routerMiddleware(History)
+))
+
 new Channel("127.0.0.1:8080", store)
 store.dispatch(connect())
 
+const history = syncHistoryWithStore(History, store)
+
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <Router history={history}>
+            <App />
+        </Router>
     </Provider>,
     document.getElementById("root")
 )

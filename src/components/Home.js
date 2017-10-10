@@ -2,7 +2,7 @@ import React, {Component} from "react"
 import {Grid, withStyles} from "material-ui"
 
 import Header from "../containers/Header"
-import Topic from "./Topic"
+import Topic from "../containers/topic/Info"
 import Sidebar from "./Sidebar"
 
 const styles = theme => ({

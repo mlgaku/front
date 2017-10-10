@@ -31,3 +31,6 @@ export const NODE_ADD = "NODE_ADD"
 export const NODE_LIST = "NODE_LIST"
 export const NODE_CHECK = "NODE_CHECK"
 export const NODE_REMOVE = "NODE_REMOVE"
+
+// 主题
+export const TOPIC_NEW = "TOPIC_NEW"

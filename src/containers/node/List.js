@@ -1,5 +1,7 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
+import {Link} from "react-router-dom"
+
 import * as Node from "../../actions/Node"
 import * as Pubsub from "../../actions/Pubsub"
 import {NODE_LIST} from "../../constants/ActionTypes"
@@ -20,6 +22,9 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const styles = theme => ({
+    a: {
+        textDecoration: "none",
+    },
     block: {
         padding: "15px",
         position: "relative",
@@ -126,7 +131,9 @@ class List extends Component {
                         <h3 className={classes.head}>{v.title}</h3>
                         <div className={classes.body}>
                             {v.child && v.child.map(w =>
-                                <Button dense key={w.id} href="#" className={classes.item}>{w.title}</Button>
+                                <Link key={w.id} to={`/node/${w.name}`} className={classes.a}>
+                                    <Button dense className={classes.item}>{w.title}</Button>
+                                </Link>
                             )}
                         </div>
 
