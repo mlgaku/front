@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
+import {Link} from "react-router-dom"
 
 import {Avatar, List, ListItem, withStyles} from "material-ui"
 import {pink, purple, indigo, blue, lightBlue, cyan, teal, green, deepOrange, deepPurple} from "material-ui/colors"
@@ -15,6 +16,9 @@ const styles = theme => ({
     root: {
         background: theme.palette.background.paper,
     },
+    item: {
+        cursor: "auto",
+    },
     chip: {
         fontSize: "12px",
         padding: "2px 8px",
@@ -27,9 +31,13 @@ const styles = theme => ({
         marginLeft: "15px",
     },
     topicTit: {
+        color: "black",
         fontSize: "16px",
         fontWeight: "400",
         lineHeight: "24px",
+    },
+    topicLink: {
+        textDecoration: "none",
     },
     topicInfo: {
         fontSize: "13px",
@@ -98,12 +106,14 @@ class Info extends Component {
             <div className={classes.root}>
                 <List>
                     {this.props.topic.list.map(x => (
-                        <ListItem key={x.id} button>
+                        <ListItem key={x.id} button className={classes.item}>
                             <Avatar
                                 className={classes.avatar + " " + eval(`classes.avatar${this.getAvatarStyle(x.author_id)}`)}
                             >{this.getAvatar(x.author)}</Avatar>
                             <div className={classes.topic}>
-                                <h3 className={classes.topicTit}>{x.title}</h3>
+                                <Link to={`/topic/${x.id}`} className={classes.topicLink}>
+                                    <h3 className={classes.topicTit}>{x.title}</h3>
+                                </Link>
                                 <div className={classes.topicInfo}>
                                     <span className={classes.chip}>{node[x.node] && node[x.node].title}</span>
                                     {x.author} • 几秒前 • 最后回复 isnowify

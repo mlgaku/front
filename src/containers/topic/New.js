@@ -10,8 +10,8 @@ import Codemirror from "../../components/Editor"
 import {Snackbar, withStyles} from "material-ui"
 
 const mapStateToProps = (state) => ({
-    node: state.node.list,
     topic: state.topic,
+    node: state.node.list,
 })
 const mapDispatchToProps = (dispatch) => ({
     sub: () => dispatch(Pubsub.add(NODE_LIST)),

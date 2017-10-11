@@ -36,3 +36,4 @@ export const NODE_REMOVE = "NODE_REMOVE"
 // 主题
 export const TOPIC_NEW = "TOPIC_NEW"
 export const TOPIC_LIST = "TOPIC_LIST"
+export const TOPIC_INFO = "TOPIC_INFO"
