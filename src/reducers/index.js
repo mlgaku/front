@@ -1,5 +1,3 @@
-import test from "./test"
-
 import node from "./node"
 import topic from "./topic"
 
@@ -10,8 +8,6 @@ import pubsub from "./pubsub"
 import lastState from "./lastState"
 
 export default {
-    test,
-
     node,
     topic,
 
