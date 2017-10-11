@@ -1,5 +1,5 @@
 import {
-    TOPIC_NEW,
+    TOPIC_NEW, TOPIC_LIST,
     MESSAGE_RECEIVE
 } from "../constants/ActionTypes"
 import {unpack} from "../utils/Route"
@@ -18,6 +18,22 @@ const topic = (state = initialState, action) => {
         // 收到消息
         case MESSAGE_RECEIVE:
             let body
+
+            // 主题列表
+            body = unpack(TOPIC_LIST, action.resp)
+            if (body) {
+                if (body.status === true) {
+                    return {
+                        ...state,
+                        list: body.data
+                    }
+                }
+
+                return {
+                    ...state,
+                    msg: body.msg
+                }
+            }
 
             // 发布主题
             body = unpack(TOPIC_NEW, action.resp)

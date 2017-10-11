@@ -26,7 +26,7 @@ class Topic extends Component {
                 {/* 主内容区 */}
                 <Grid container justify="center" spacing={0} className={classes.bgColor}>
                     <Grid item xs={8} className={classes.content}>
-                        {this.props.match.params.id ? <Info name={this.props.match.params.id} /> : <New />}
+                        {this.props.match.params.id ? <Info id={this.props.match.params.id} /> : <New />}
                     </Grid>
                 </Grid>
             </div>

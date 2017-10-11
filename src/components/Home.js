@@ -1,9 +1,27 @@
 import React, {Component} from "react"
+import {connect} from "react-redux"
+
+import * as Pubsub from "../actions/Pubsub"
+import {NODE_LIST, TOPIC_LIST} from "../constants/ActionTypes"
+
 import {Grid, withStyles} from "material-ui"
 
 import Header from "../containers/Header"
-import Topic from "../containers/topic/Info"
+import Topic from "../containers/topic/List"
 import Sidebar from "./Sidebar"
+
+const mapStateToProps = (state) => ({
+})
+const mapDispatchToProps = (dispatch) => ({
+    sub: () => {
+        dispatch(Pubsub.add(NODE_LIST))
+        dispatch(Pubsub.add(TOPIC_LIST))
+    },
+    unsub: () => {
+        dispatch(Pubsub.remove(NODE_LIST))
+        dispatch(Pubsub.remove(TOPIC_LIST))
+    },
+})
 
 const styles = theme => ({
     left: {
@@ -18,6 +36,17 @@ const styles = theme => ({
 })
 
 class Home extends Component {
+
+    // 组件装载
+    componentWillMount() {
+        this.props.sub()
+    }
+
+    // 组件卸载
+    componentWillUnmount() {
+        this.props.unsub()
+    }
+
     render() {
         const classes = this.props.classes
 
@@ -46,4 +75,4 @@ class Home extends Component {
     }
 }
 
-export default withStyles(styles)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Home))

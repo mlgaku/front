@@ -1,7 +1,7 @@
 import {
     PUBSUB_ADD, PUBSUB_REMOVE,
-    NODE_ADD, NODE_LIST, NODE_CHECK, NODE_REMOVE,
-    TOPIC_NEW,
+    NODE_ADD, NODE_LIST, NODE_INFO, NODE_CHECK, NODE_REMOVE,
+    TOPIC_NEW, TOPIC_LIST,
     LOGIN_SUBMIT,
     REGISTER_CHECK, REGISTER_SUBMIT,
 } from "./ActionTypes"
@@ -16,11 +16,13 @@ let f = {
     // 节点
     [NODE_ADD]: {mod: "node", act: "add"},
     [NODE_LIST]: {mod: "node", act: "list"},
+    [NODE_INFO]: {mod: "node", act: "info"},
     [NODE_CHECK]: {mod: "node", act: "check"},
     [NODE_REMOVE]: {mod: "node", act: "remove"},
 
     // 主题
     [TOPIC_NEW]: {mod: "topic", act: "new"},
+    [TOPIC_LIST]: {mod: "topic", act: "list"},
 
     // 登录
     [LOGIN_SUBMIT]: {mod: "user", act: "login"},

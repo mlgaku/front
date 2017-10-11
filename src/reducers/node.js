@@ -1,6 +1,6 @@
 import {
     NODE_SHOW, NODE_HIDE,
-    NODE_ADD, NODE_LIST, NODE_CHECK, NODE_REMOVE,
+    NODE_ADD, NODE_LIST, NODE_INFO, NODE_CHECK, NODE_REMOVE,
     MESSAGE_RECEIVE
 } from "../constants/ActionTypes"
 import {unpack} from "../utils/Route"
@@ -10,6 +10,8 @@ const initialState = {
     msg: "",
     // 节点列表
     list: [],
+    // (单个)节点信息
+    info: {},
     // 是否显示模态框
     show: false,
     // 节点名是否已存在
@@ -52,6 +54,22 @@ const node = (state = initialState, action) => {
                 return {
                     ...state,
                     msg: "节点列表获取失败!"
+                }
+            }
+
+            // 节点信息
+            body = unpack(NODE_INFO, action.resp)
+            if (body) {
+                if (body.status === true) {
+                    return {
+                        ...state,
+                        info: body.data
+                    }
+                }
+
+                return {
+                    ...state,
+                    msg: "节点信息获取失败!"
                 }
             }
 

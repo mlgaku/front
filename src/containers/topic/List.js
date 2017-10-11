@@ -5,8 +5,8 @@ import {Avatar, List, ListItem, withStyles} from "material-ui"
 import {pink, purple, indigo, blue, lightBlue, cyan, teal, green, deepOrange, deepPurple} from "material-ui/colors"
 
 const mapStateToProps = (state) => ({
+    node: state.node,
     topic: state.topic,
-    node: state.node.list,
 })
 const mapDispatchToProps = (dispatch) => ({
 })
@@ -59,8 +59,11 @@ class Info extends Component {
     // 格式化节点信息
     formatNode() {
         const node = []
-        for (let x of this.props.node) {
+        for (let x of this.props.node.list) {
             node[x.id] = x
+        }
+        if (this.props.node.info.id) {
+            node[this.props.node.info.id] = this.props.node.info
         }
         return node
     }
