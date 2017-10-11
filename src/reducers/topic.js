@@ -25,7 +25,6 @@ const topic = (state = initialState, action) => {
                 if (body.status === true) {
                     return {
                         ...state,
-                        msg: "发布成功!",
                         redirect: `/topic/${body.data}`
                     }
                 }
