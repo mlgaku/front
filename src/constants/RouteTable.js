@@ -5,6 +5,7 @@ import {
     REPLAY_NEW, REPLAY_LIST,
     LOGIN_SUBMIT,
     REGISTER_CHECK, REGISTER_SUBMIT,
+    NOTICE_LIST,
 } from "./ActionTypes"
 
 // 正向
@@ -36,6 +37,9 @@ let f = {
     // 注册
     [REGISTER_CHECK]: {mod: "user", act: "check"},
     [REGISTER_SUBMIT]: {mod: "user", act: "reg"},
+
+    // 通知
+    [NOTICE_LIST]: {mod: "notice", act: "list"},
 
 }
 

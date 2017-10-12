@@ -11,7 +11,7 @@ const initialState = {
     // 登录信息
     info: {},
     // 是否已登录
-    logged: true,
+    logged: false,
 }
 
 const login = (state = initialState, action) => {

@@ -16,6 +16,7 @@
     "react-scripts": "1.0.14",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "reshake": "^1.0.7",
     "validatorjs": "^3.13.5"
   },
   "scripts": {

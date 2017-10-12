@@ -24,6 +24,9 @@ export const REGISTER_HIDE = "REGISTER_HIDE"
 export const REGISTER_CHECK = "REGISTER_CHECK"
 export const REGISTER_SUBMIT = "REGISTER_SUBMIT"
 
+// 通知
+export const NOTICE_LIST = "NOTICE_LIST"
+
 // 节点
 export const NODE_SHOW = "NODE_SHOW"
 export const NODE_HIDE = "NODE_HIDE"

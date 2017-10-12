@@ -1,15 +1,21 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
-import {logout} from "../actions/Login"
+import {Link} from "react-router-dom"
 
-import {Avatar, IconButton, Menu, MenuItem, withStyles} from "material-ui"
+import * as Pubsub from "../actions/Pubsub"
+import {NOTICE_LIST} from "../constants/ActionTypes"
+
+import {Shake, ShakeRotate} from "reshake"
+import {IconButton, Badge, Menu, MenuItem, withStyles} from "material-ui"
 import {Notifications} from "material-ui-icons"
 
 const mapStateToProps = (state) => ({
+    notice: state.notice,
     loginInfo: state.login.info,
 })
 const mapDispatchToProps = (dispatch) => ({
-    logout: () => dispatch(logout()),
+    sub: (master) => dispatch(Pubsub.add(NOTICE_LIST, {master})),
+    unsub: () => dispatch(Pubsub.remove(NOTICE_LIST)),
 })
 
 const styles = theme => ({
@@ -18,7 +24,7 @@ const styles = theme => ({
         textDecoration: "none",
     },
     div: {
-        display: "inline",
+        display: "inline-block",
     },
     menu: {
         marginTop: "35px",
@@ -46,9 +52,20 @@ const styles = theme => ({
 })
 
 class Notice extends Component {
+
     state = {
         open: false,
         anchorEl: null,
+    }
+
+    // 组件装载
+    componentWillMount() {
+        this.props.sub(this.props.loginInfo.id)
+    }
+
+    // 组件卸载
+    componentWillUnmount() {
+        this.props.unsub()
     }
 
     handleClick = event => {
@@ -65,24 +82,32 @@ class Notice extends Component {
         return (
             <div className={classes.div}>
                 <IconButton color="contrast" aria-label="Notifications" aria-owns={this.state.open ? "long-menu" : null} aria-haspopup="true" onClick={this.handleClick}>
-                    <Notifications />
+                    {this.props.notice.list.length ?
+                        <ShakeRotate fixed style={{lineHeight: "0"}}><Notifications /></ShakeRotate>
+                        : <Notifications />}
                 </IconButton>
 
                 <Menu className={classes.menu} anchorEl={this.state.anchorEl} open={this.state.open} onRequestClose={this.handleRequestClose} PaperProps={{style: {width: 400, height: 330}}}>
                     <MenuItem key="title" className={classes.title}>通知</MenuItem>
-                    <MenuItem key="one" className={classes.item}>
-                        sxyazi 回复了你的主题 <a href="" className={classes.a}>cn.bing.com 经常性的打不开</a>
-                    </MenuItem>
-                    <MenuItem key="two" className={classes.item}>
-                        anosann 回复了你的主题 <a href="" className={classes.a}>麦乐学园非官方QQ交流群列表</a>
-                    </MenuItem>
-                    <MenuItem key="three" className={classes.item + " " + classes.read}>
-                        saximi 回复了你的主题 <a href="" className={classes.a + " " + classes.read}>Electron 环境下装了 Sqlite3 后，每次再装新的包都提示 Sqlite3 找不到模块，要重新编译 Sqlite3 才行</a>
-                    </MenuItem>
+                    {this.props.notice.list.map(x => {
+                        switch (x.type) {
+                            case 1: // 回复
+                                return (
+                                    <MenuItem key={x.id} className={classes.item + " " + (x.read?classes.read:"")}>
+                                        {x.user} 回复了你的主题 <Link to={`/topic/${x.topic_id}`} className={classes.a + " " + (x.read?classes.read:"")}>{x.topic_title}</Link>
+                                    </MenuItem>
+                                )
+                            case 2: // At
+                                return (
+                                    <span>at</span>
+                                )
+                        }
+                    })}
                 </Menu>
             </div>
         )
     }
+
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Notice))
