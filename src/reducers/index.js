@@ -1,5 +1,6 @@
 import node from "./node"
 import topic from "./topic"
+import replay from "./replay"
 
 import login from "./login"
 import register from "./register"
@@ -10,6 +11,7 @@ import lastState from "./lastState"
 export default {
     node,
     topic,
+    replay,
 
     login,
     register,

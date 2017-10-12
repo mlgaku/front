@@ -2,6 +2,7 @@ import {
     PUBSUB_ADD, PUBSUB_REMOVE,
     NODE_ADD, NODE_LIST, NODE_INFO, NODE_CHECK, NODE_REMOVE,
     TOPIC_NEW, TOPIC_LIST, TOPIC_INFO,
+    REPLAY_NEW, REPLAY_LIST,
     LOGIN_SUBMIT,
     REGISTER_CHECK, REGISTER_SUBMIT,
 } from "./ActionTypes"
@@ -24,6 +25,10 @@ let f = {
     [TOPIC_NEW]: {mod: "topic", act: "new"},
     [TOPIC_LIST]: {mod: "topic", act: "list"},
     [TOPIC_INFO]: {mod: "topic", act: "info"},
+
+    // 回复
+    [REPLAY_NEW]: {mod: "replay", act: "new"},
+    [REPLAY_LIST]: {mod: "replay", act: "list"},
 
     // 登录
     [LOGIN_SUBMIT]: {mod: "user", act: "login"},

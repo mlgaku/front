@@ -4,9 +4,10 @@ import {connect} from "react-redux"
 import * as Pubsub from "../../actions/Pubsub"
 import {TOPIC_INFO} from "../../constants/ActionTypes"
 
+import Replay from "./Reply"
+import Sidebar from "../../components/Sidebar"
 import ReactMarkdown from "react-markdown"
 import {Grid, withStyles} from "material-ui"
-import Sidebar from "../../components/Sidebar"
 
 const mapStateToProps = (state) => ({
     topic: state.topic.info,
@@ -19,10 +20,13 @@ const mapDispatchToProps = (dispatch) => ({
 const styles = theme => ({
     left: {
         padding: "20px 15px",
-        background: theme.palette.background.paper,
     },
     right: {
-        padding: "0 15px",
+        padding: "20px 15px",
+    },
+    info: {
+        padding: "15px",
+        background: theme.palette.background.paper,
     },
 })
 
@@ -49,10 +53,14 @@ class Info extends Component {
             <Grid container spacing={0}>
                 {/* 左侧 */}
                 <Grid item xs={9} className={classes.left}>
-                    <h1>{this.props.topic.title}</h1>
-                    <span>作者: {this.props.topic.author}</span>
-                    <hr />
-                    {this.props.topic.content ? <ReactMarkdown source={this.props.topic.content} /> : ""}
+                    <div className={classes.info}>
+                        <h1>{this.props.topic.title}</h1>
+                        <span>作者: {this.props.topic.author}</span>
+                        <hr />
+                        {this.props.topic.content ? <ReactMarkdown source={this.props.topic.content} /> : ""}
+                    </div>
+                    <br />
+                    <Replay topic={this.props.id} />
                 </Grid>
                 {/* 右侧 */}
                 <Grid item xs={3} className={classes.right}>

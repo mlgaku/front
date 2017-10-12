@@ -6,9 +6,6 @@ import New from "../containers/topic/New"
 import Info from "../containers/topic/Info"
 
 const styles = theme => ({
-    content: {
-        padding: "20px 15px",
-    },
     bgColor: {
         backgroundColor: "#f1f1f1",
     }

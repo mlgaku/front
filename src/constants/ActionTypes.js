@@ -37,3 +37,7 @@ export const NODE_REMOVE = "NODE_REMOVE"
 export const TOPIC_NEW = "TOPIC_NEW"
 export const TOPIC_LIST = "TOPIC_LIST"
 export const TOPIC_INFO = "TOPIC_INFO"
+
+// 回复
+export const REPLAY_NEW = "REPLAY_NEW"
+export const REPLAY_LIST = "REPLAY_LIST"
