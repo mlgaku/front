@@ -5,7 +5,7 @@ import {
     REPLAY_NEW, REPLAY_LIST,
     LOGIN_SUBMIT,
     REGISTER_CHECK, REGISTER_SUBMIT,
-    NOTICE_LIST,
+    NOTICE_LIST, NOTICE_REMOVE,
 } from "./ActionTypes"
 
 // 正向
@@ -40,6 +40,7 @@ let f = {
 
     // 通知
     [NOTICE_LIST]: {mod: "notice", act: "list"},
+    [NOTICE_REMOVE]: {mod: "notice", act: "remove"},
 
 }
 

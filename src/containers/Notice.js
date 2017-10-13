@@ -3,6 +3,7 @@ import {connect} from "react-redux"
 import {Link} from "react-router-dom"
 
 import * as Pubsub from "../actions/Pubsub"
+import {remove} from "../actions/Notice"
 import {NOTICE_LIST} from "../constants/ActionTypes"
 
 import {ShakeRotate} from "reshake"
@@ -16,6 +17,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     sub: (master) => dispatch(Pubsub.add(NOTICE_LIST, {master})),
     unsub: () => dispatch(Pubsub.remove(NOTICE_LIST)),
+    remove: (id) => dispatch(remove(id)),
 })
 
 const styles = theme => ({
@@ -66,12 +68,19 @@ class Notice extends Component {
         this.props.unsub()
     }
 
+    // 显示通知
     handleClick = event => {
-        this.setState({ open: true, anchorEl: event.currentTarget })
+        this.setState({open: true, anchorEl: event.currentTarget})
     }
 
+    // 隐藏通知
     handleRequestClose = () => {
-        this.setState({ open: false })
+        this.setState({open: false})
+    }
+
+    // 移除通知
+    removeNotice(id) {
+        this.props.remove(id)
     }
 
     render () {
@@ -93,7 +102,7 @@ class Notice extends Component {
                                 return (
                                     <MenuItem key={x.id} className={classes.item}>
                                         <div>{x.user} 回复了你的主题 <Link to={`/topic/${x.topic_id}`} className={classes.a}>{x.topic_title}</Link></div>
-                                        <IconButton aria-label="Delete"><DeleteIcon /></IconButton>
+                                        <IconButton aria-label="Delete" onClick={() => this.removeNotice(x.id)}><DeleteIcon /></IconButton>
                                     </MenuItem>
                                 )
                             case 2: // At

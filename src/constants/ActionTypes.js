@@ -26,6 +26,7 @@ export const REGISTER_SUBMIT = "REGISTER_SUBMIT"
 
 // 通知
 export const NOTICE_LIST = "NOTICE_LIST"
+export const NOTICE_REMOVE = "NOTICE_REMOVE"
 
 // 节点
 export const NODE_SHOW = "NODE_SHOW"
