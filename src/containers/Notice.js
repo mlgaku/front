@@ -5,9 +5,9 @@ import {Link} from "react-router-dom"
 import * as Pubsub from "../actions/Pubsub"
 import {NOTICE_LIST} from "../constants/ActionTypes"
 
-import {Shake, ShakeRotate} from "reshake"
-import {IconButton, Badge, Menu, MenuItem, withStyles} from "material-ui"
-import {Notifications} from "material-ui-icons"
+import {ShakeRotate} from "reshake"
+import {IconButton, Menu, MenuItem, withStyles} from "material-ui"
+import {Delete as DeleteIcon, Notifications as NotificationsIcon} from "material-ui-icons"
 
 const mapStateToProps = (state) => ({
     notice: state.notice,
@@ -31,20 +31,18 @@ const styles = theme => ({
         marginLeft: "-350px",
     },
     item: {
+        height: "auto",
         cursor: "auto",
         fontSize: "13px",
-        marginTop: "5px",
         wordWrap: "break-word",
         whiteSpace: "normal",
-        display: "block",
-        height: "auto",
-    },
-    read: {
-        color: "#bfbfbf",
+        paddingRight: "10px",
+        borderBottom: "1px solid #e4e4e4",
     },
     title: {
         cursor: "auto",
         marginTop: "-10px",
+        marginBottom: "8px",
         paddingTop: "15px",
         paddingBottom: "15px",
         backgroundColor: "#eee !important",
@@ -83,8 +81,8 @@ class Notice extends Component {
             <div className={classes.div}>
                 <IconButton color="contrast" aria-label="Notifications" aria-owns={this.state.open ? "long-menu" : null} aria-haspopup="true" onClick={this.handleClick}>
                     {this.props.notice.list.length ?
-                        <ShakeRotate fixed style={{lineHeight: "0"}}><Notifications /></ShakeRotate>
-                        : <Notifications />}
+                        <ShakeRotate fixed style={{lineHeight: "0"}}><NotificationsIcon /></ShakeRotate>
+                        : <NotificationsIcon />}
                 </IconButton>
 
                 <Menu className={classes.menu} anchorEl={this.state.anchorEl} open={this.state.open} onRequestClose={this.handleRequestClose} PaperProps={{style: {width: 400, height: 330}}}>
@@ -93,8 +91,9 @@ class Notice extends Component {
                         switch (x.type) {
                             case 1: // 回复
                                 return (
-                                    <MenuItem key={x.id} className={classes.item + " " + (x.read?classes.read:"")}>
-                                        {x.user} 回复了你的主题 <Link to={`/topic/${x.topic_id}`} className={classes.a + " " + (x.read?classes.read:"")}>{x.topic_title}</Link>
+                                    <MenuItem key={x.id} className={classes.item}>
+                                        <div>{x.user} 回复了你的主题 <Link to={`/topic/${x.topic_id}`} className={classes.a}>{x.topic_title}</Link></div>
+                                        <IconButton aria-label="Delete"><DeleteIcon /></IconButton>
                                     </MenuItem>
                                 )
                             case 2: // At
