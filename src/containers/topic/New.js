@@ -6,8 +6,8 @@ import * as Pubsub from "../../actions/Pubsub"
 import * as Topic from "../../actions/Topic"
 import {NODE_LIST} from "../../constants/ActionTypes"
 
-import Codemirror from "../../components/Editor"
-import {Snackbar, withStyles} from "material-ui"
+import Editor from "../../components/Editor"
+import {Button, Select, InputLabel, Snackbar, FormControl, withStyles} from "material-ui"
 
 const mapStateToProps = (state) => ({
     topic: state.topic,
@@ -20,7 +20,37 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const styles = theme => ({
-
+    root: {
+        margin: "20px 0",
+        background: "white",
+        padding: "15px 20px",
+    },
+    head: {
+        fontSize: "25px",
+        marginBottom: "15px",
+        paddingBottom: "10px",
+        borderBottom: "1px solid #e4e4e4",
+    },
+    node: {
+        width: "250px",
+    },
+    title: {
+        width: "100%",
+        outline: "none",
+        padding: "10px",
+        boxSizing: "border-box",
+        border: "1px solid #e4e4e4",
+    },
+    bottom: {
+        display: "flex",
+        marginTop: "5px",
+        padding: "15px 0 5px",
+        justifyContent: "space-between",
+    },
+    content: {
+        border: "1px solid #e4e4e4",
+        borderTop: "none",
+    },
 })
 
 class New extends Component {
@@ -62,17 +92,20 @@ class New extends Component {
         }
 
         return (
-            <div>
-                <h1>发布主题</h1>
-                <input type="text" onChange={t => this.setState({title: t.target.value})} />
-                <Codemirror height="500px" onChange={c => this.setState({content: c})} />
-                <select onChange={n => this.setState({node: n.target.value})}>
-                    <option>选择节点</option>
-                    {this.props.node.map(x => (
-                        <option key={x.id} value={x.id}>{x.name} / {x.title}</option>
-                    ))}
-                </select>
-                <button onClick={this.submit.bind(this)}>发布</button>
+            <div className={classes.root}>
+                <h1 className={classes.head}>发布主题</h1>
+                <input type="text" onChange={t => this.setState({title: t.target.value})} className={classes.title} placeholder="请输入主题标题, 若标题能够表达完整内容, 则正文内容可以为空" />
+                <Editor linewrap height="500px" onChange={c => this.setState({content: c})} className={classes.content} />
+
+                <div className={classes.bottom}>
+                    <Select native onChange={n => this.setState({node: n.target.value})} className={classes.node}>
+                        <option>选择节点</option>
+                        {this.props.node.map(x => (
+                            <option key={x.id} value={x.id}>{x.name} / {x.title}</option>
+                        ))}
+                    </Select>
+                    <Button raised dense color="accent" onClick={this.submit.bind(this)}>提交</Button>
+                </div>
 
                 <Snackbar
                     anchorOrigin={{vertical: "top", horizontal: "center", direction: "down"}}

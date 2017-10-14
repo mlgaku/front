@@ -37,7 +37,7 @@ class Editor extends Component{
             mode: "markdown",
             readOnly: false,
             lineNumbers: this.props.linenum || false,
-            lineWrapping: this.props.linewrap || false,
+            lineWrapping: this.props.linewrap || false
         })
         this.codemirror.on("change", this.valueChanged.bind(this))
         this.codemirror.setSize("100%", this.props.height || "400px")
@@ -58,7 +58,7 @@ class Editor extends Component{
         return (
             <Grid container spacing={0} className={this.props.className}>
                 <Grid item xs={6} className={classes.left}>
-                    <textarea rows="20" ref={r => this.textarea = r}></textarea>
+                    <textarea rows="20" ref={r => this.textarea = r} style={{padding: "10px"}}></textarea>
                 </Grid>
                 <Grid item xs={6} className={classes.right} style={{maxHeight: this.props.height || "none"}}>
                     <ReactMarkdown source={this.state.content} className={classes.view + " markdown-body"} />

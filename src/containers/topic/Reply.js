@@ -10,7 +10,7 @@ import * as Replay from "../../actions/Replay"
 import {REPLAY_LIST} from "../../constants/ActionTypes"
 
 import "github-markdown-css"
-import Codemirror from "../../components/Editor"
+import Editor from "../../components/Editor"
 
 const mapStateToProps = (state) => ({
     replay: state.replay,
@@ -98,7 +98,7 @@ class Reply extends Component {
                 <br />
 
                 <div className={classes.replay}>
-                    <Codemirror height="150px" linewrap onChange={c => this.setState({content: c})} className={classes.editor} />
+                    <Editor height="150px" linewrap onChange={c => this.setState({content: c})} className={classes.editor} />
                     <Button raised dense color="accent" onClick={() => this.submit()} className={classes.submit}>提交</Button>
                 </div>
 
