@@ -108,15 +108,15 @@ class Info extends Component {
                     {this.props.topic.list.map(x => (
                         <ListItem key={x.id} button className={classes.item}>
                             <Avatar
-                                className={classes.avatar + " " + eval(`classes.avatar${this.getAvatarStyle(x.author_id)}`)}
-                            >{this.getAvatar(x.author)}</Avatar>
+                                className={classes.avatar + " " + eval(`classes.avatar${this.getAvatarStyle(x.author)}`)}
+                            >{this.getAvatar(x.user.name)}</Avatar>
                             <div className={classes.topic}>
                                 <Link to={`/topic/${x.id}`} className={classes.topicLink}>
                                     <h3 className={classes.topicTit}>{x.title}</h3>
                                 </Link>
                                 <div className={classes.topicInfo}>
                                     <span className={classes.chip}>{node[x.node] && node[x.node].title}</span>
-                                    {x.author} • 几秒前 • 最后回复 isnowify
+                                    {x.user.name} • 几秒前 • 最后回复 isnowify
                                 </div>
                             </div>
                         </ListItem>

@@ -4,6 +4,7 @@ import {Grid, withStyles} from "material-ui"
 import Codemirror from "codemirror"
 import ReactMarkdown from "react-markdown"
 
+import "github-markdown-css"
 import "codemirror/lib/codemirror.css"
 
 import "codemirror/mode/javascript/javascript"
@@ -15,6 +16,7 @@ const styles = theme => ({
     view: {
         height: "100%",
         padding: "5px",
+        fontSize: "14px",
         boxSizing: "border-box",
         borderLeft: "1px solid #e4e4e4",
         background: "white",
@@ -34,7 +36,8 @@ class Editor extends Component{
         this.codemirror = Codemirror.fromTextArea(this.textarea, {
             mode: "markdown",
             readOnly: false,
-            lineNumbers: true,
+            lineNumbers: this.props.linenum || false,
+            lineWrapping: this.props.linewrap || false,
         })
         this.codemirror.on("change", this.valueChanged.bind(this))
         this.codemirror.setSize("100%", this.props.height || "400px")
@@ -53,12 +56,12 @@ class Editor extends Component{
         const classes = this.props.classes
 
         return (
-            <Grid container spacing={0}>
+            <Grid container spacing={0} className={this.props.className}>
                 <Grid item xs={6} className={classes.left}>
                     <textarea rows="20" ref={r => this.textarea = r}></textarea>
                 </Grid>
                 <Grid item xs={6} className={classes.right} style={{maxHeight: this.props.height || "none"}}>
-                    <ReactMarkdown source={this.state.content} className={classes.view} />
+                    <ReactMarkdown source={this.state.content} className={classes.view + " markdown-body"} />
                 </Grid>
             </Grid>
         )

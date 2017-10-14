@@ -1,11 +1,15 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
-import {Snackbar, withStyles} from "material-ui"
+
+import {Link} from "react-router-dom"
+import ReactMarkdown from "react-markdown"
+import {Button, Avatar, Snackbar, withStyles} from "material-ui"
 
 import * as Pubsub from "../../actions/Pubsub"
 import * as Replay from "../../actions/Replay"
 import {REPLAY_LIST} from "../../constants/ActionTypes"
 
+import "github-markdown-css"
 import Codemirror from "../../components/Editor"
 
 const mapStateToProps = (state) => ({
@@ -18,8 +22,35 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const styles = theme => ({
-    root: {
+    root: {},
+    list: {
+        padding: "15px 20px",
         background: theme.palette.background.paper,
+    },
+    item: {
+        display: "flex",
+        marginTop: "15px",
+    },
+    link: {
+        color: "black",
+        fontWeight: "bold",
+        textDecoration: "none",
+    },
+    avatar: {
+        marginRight: "15px",
+    },
+    replay: {
+        padding: "15px",
+        background: theme.palette.background.paper,
+    },
+    editor: {
+        border: "1px solid #e4e4e4",
+    },
+    submit: {
+        marginTop: "10px",
+    },
+    content: {
+        padding: "10px 0",
     },
 })
 
@@ -52,23 +83,23 @@ class Reply extends Component {
 
         return (
             <div className={classes.root}>
-                <div>
-                    <h3>回复列表</h3>
-                    <ul>
-                        {this.props.replay.list.map(x => (
-                            <li key={x.id}>
-                                内容: {x.content}
-                                <br />
-                                作者: {x.author}
-                                <hr />
-                            </li>
-                        ))}
-                    </ul>
+                <div className={classes.list}>
+                    {this.props.replay.list.map(x => (
+                        <div key={x.id} className={classes.item}>
+                            <Avatar className={classes.avatar}>{x.user.name}</Avatar>
+                            <div>
+                                <Link to={`/user/${x.user.name}`} className={classes.link}  >{x.user.name}</Link>
+                                <ReactMarkdown source={x.content} className={classes.content} />
+                            </div>
+                        </div>
+                    ))}
                 </div>
+
                 <br />
-                <div>
-                    <Codemirror height="150px" onChange={c => this.setState({content: c})} />
-                    <button onClick={() => this.submit()}>提交</button>
+
+                <div className={classes.replay}>
+                    <Codemirror height="150px" linewrap onChange={c => this.setState({content: c})} className={classes.editor} />
+                    <Button raised dense color="accent" onClick={() => this.submit()} className={classes.submit}>提交</Button>
                 </div>
 
                 <Snackbar

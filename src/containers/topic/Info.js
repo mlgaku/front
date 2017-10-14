@@ -4,6 +4,8 @@ import {connect} from "react-redux"
 import * as Pubsub from "../../actions/Pubsub"
 import {TOPIC_INFO} from "../../constants/ActionTypes"
 
+import "github-markdown-css"
+
 import Replay from "./Reply"
 import Sidebar from "../../components/Sidebar"
 import ReactMarkdown from "react-markdown"
@@ -24,9 +26,26 @@ const styles = theme => ({
     right: {
         padding: "20px 15px",
     },
-    info: {
-        padding: "15px",
+    meta: {
+        padding: "15px 20px",
+        fontSize: "15px",
+        borderBottom: "1px solid #e4e4e4",
         background: theme.palette.background.paper,
+    },
+    info: {
+        color: "#444",
+        fontSize: "14px",
+        lineHeight: "1.8",
+        padding: "15px 20px",
+        background: theme.palette.background.paper,
+    },
+    title: {
+        fontWeight: "normal",
+    },
+    author: {
+        color: "#999",
+        fontSize: "13px",
+        marginTop: "5px",
     },
 })
 
@@ -53,10 +72,11 @@ class Info extends Component {
             <Grid container spacing={0}>
                 {/* 左侧 */}
                 <Grid item xs={9} className={classes.left}>
-                    <div className={classes.info}>
-                        <h1>{this.props.topic.title}</h1>
-                        <span>作者: {this.props.topic.author}</span>
-                        <hr />
+                    <div className={classes.meta}>
+                        <h1 className={classes.title}>{this.props.topic.title}</h1>
+                        <span className={classes.author}>作者: {this.props.topic.user.name}</span>
+                    </div>
+                    <div className={classes.info + " markdown-body"}>
                         {this.props.topic.content ? <ReactMarkdown source={this.props.topic.content} /> : ""}
                     </div>
                     <br />
