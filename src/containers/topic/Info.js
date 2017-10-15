@@ -6,7 +6,7 @@ import {TOPIC_INFO} from "../../constants/ActionTypes"
 
 import "github-markdown-css"
 
-import Replay from "./Reply"
+import Reply from "./Reply"
 import Sidebar from "../../components/Sidebar"
 import ReactMarkdown from "react-markdown"
 import {Grid, withStyles} from "material-ui"
@@ -80,7 +80,7 @@ class Info extends Component {
                         {this.props.topic.content ? <ReactMarkdown source={this.props.topic.content} /> : ""}
                     </div>
                     <br />
-                    <Replay topic={this.props.id} />
+                    <Reply topic={this.props.id} />
                 </Grid>
                 {/* 右侧 */}
                 <Grid item xs={3} className={classes.right}>

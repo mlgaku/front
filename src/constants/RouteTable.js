@@ -2,7 +2,7 @@ import {
     PUBSUB_ADD, PUBSUB_REMOVE,
     NODE_ADD, NODE_LIST, NODE_INFO, NODE_CHECK, NODE_REMOVE,
     TOPIC_NEW, TOPIC_LIST, TOPIC_INFO,
-    REPLAY_NEW, REPLAY_LIST,
+    REPLY_NEW, REPLY_LIST,
     LOGIN_SUBMIT,
     REGISTER_CHECK, REGISTER_SUBMIT,
     NOTICE_LIST, NOTICE_REMOVE,
@@ -28,8 +28,8 @@ let f = {
     [TOPIC_INFO]: {mod: "topic", act: "info"},
 
     // 回复
-    [REPLAY_NEW]: {mod: "replay", act: "new"},
-    [REPLAY_LIST]: {mod: "replay", act: "list"},
+    [REPLY_NEW]: {mod: "reply", act: "new"},
+    [REPLY_LIST]: {mod: "reply", act: "list"},
 
     // 登录
     [LOGIN_SUBMIT]: {mod: "user", act: "login"},

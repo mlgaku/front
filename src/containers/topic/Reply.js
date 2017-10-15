@@ -6,19 +6,19 @@ import ReactMarkdown from "react-markdown"
 import {Button, Avatar, Snackbar, withStyles} from "material-ui"
 
 import * as Pubsub from "../../actions/Pubsub"
-import * as Replay from "../../actions/Replay"
-import {REPLAY_LIST} from "../../constants/ActionTypes"
+import {submit} from "../../actions/Reply"
+import {REPLY_LIST} from "../../constants/ActionTypes"
 
 import "github-markdown-css"
 import Editor from "../../components/Editor"
 
 const mapStateToProps = (state) => ({
-    replay: state.replay,
+    reply: state.reply,
 })
 const mapDispatchToProps = (dispatch) => ({
-    sub: (topic) => dispatch(Pubsub.add(REPLAY_LIST, {topic})),
-    unsub: (topic) => dispatch(Pubsub.remove(REPLAY_LIST, {topic})),
-    submit: (topic, content) => dispatch(Replay.submit(topic, content)),
+    sub: (topic) => dispatch(Pubsub.add(REPLY_LIST, {topic})),
+    unsub: (topic) => dispatch(Pubsub.remove(REPLY_LIST, {topic})),
+    submit: (topic, content) => dispatch(submit(topic, content)),
 })
 
 const styles = theme => ({
@@ -39,7 +39,7 @@ const styles = theme => ({
     avatar: {
         marginRight: "15px",
     },
-    replay: {
+    reply: {
         padding: "15px",
         background: theme.palette.background.paper,
     },
@@ -84,7 +84,7 @@ class Reply extends Component {
         return (
             <div className={classes.root}>
                 <div className={classes.list}>
-                    {this.props.replay.list.map(x => (
+                    {this.props.reply.list.map(x => (
                         <div key={x.id} className={classes.item}>
                             <Avatar className={classes.avatar}>{x.user.name}</Avatar>
                             <div>
@@ -97,19 +97,19 @@ class Reply extends Component {
 
                 <br />
 
-                <div className={classes.replay}>
+                <div className={classes.reply}>
                     <Editor height="150px" linewrap onChange={c => this.setState({content: c})} className={classes.editor} />
                     <Button raised dense color="accent" onClick={() => this.submit()} className={classes.submit}>提交</Button>
                 </div>
 
                 <Snackbar
                     anchorOrigin={{vertical: "top", horizontal: "center", direction: "down"}}
-                    open={this.state.msg !== "" || this.props.replay.msg !== ""}
-                    onRequestClose={() => {this.setState({msg:""}); this.props.replay.msg=""}}
+                    open={this.state.msg !== "" || this.props.reply.msg !== ""}
+                    onRequestClose={() => {this.setState({msg:""}); this.props.reply.msg=""}}
                     SnackbarContentProps={{
                         "aria-describedby": "message-id",
                     }}
-                    message={<span id="message-id">{this.state.msg || this.props.replay.msg}</span>}
+                    message={<span id="message-id">{this.state.msg || this.props.reply.msg}</span>}
                 />
             </div>
         )

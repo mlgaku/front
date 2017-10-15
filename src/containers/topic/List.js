@@ -116,7 +116,7 @@ class Info extends Component {
                                 </Link>
                                 <div className={classes.topicInfo}>
                                     <span className={classes.chip}>{node[x.node] && node[x.node].title}</span>
-                                    {x.user.name} • 几秒前 • 最后回复 isnowify
+                                    {x.user.name} • 几秒前 • {x.last_reply ? `最后回复 ${x.last_reply}` : ""}
                                 </div>
                             </div>
                         </ListItem>

@@ -1,5 +1,5 @@
 import {
-    REPLAY_NEW, REPLAY_LIST,
+    REPLY_NEW, REPLY_LIST,
     MESSAGE_RECEIVE
 } from "../constants/ActionTypes"
 import {unpack} from "../utils/Route"
@@ -11,14 +11,14 @@ const initialState = {
     list: [],
 }
 
-const replay = (state = initialState, action) => {
+const reply = (state = initialState, action) => {
     switch (action.type) {
         // 收到消息
         case MESSAGE_RECEIVE:
             let body
 
             // 回复列表
-            body = unpack(REPLAY_LIST, action.resp)
+            body = unpack(REPLY_LIST, action.resp)
             if (body) {
                 if (body.status === true) {
                     return {
@@ -34,7 +34,7 @@ const replay = (state = initialState, action) => {
             }
 
             // 发表回复
-            body = unpack(REPLAY_NEW, action.resp)
+            body = unpack(REPLY_NEW, action.resp)
             if (body) {
                 if (body.status === true) {
                     return {
@@ -56,4 +56,4 @@ const replay = (state = initialState, action) => {
     }
 }
 
-export default replay
+export default reply
