@@ -76,9 +76,10 @@ class Info extends Component {
                         <h1 className={classes.title}>{this.props.topic.title}</h1>
                         <span className={classes.author}>作者: {this.props.topic.user.name}</span>
                     </div>
-                    <div className={classes.info + " markdown-body"}>
-                        {this.props.topic.content ? <ReactMarkdown source={this.props.topic.content} /> : ""}
-                    </div>
+                    {this.props.topic.content ?
+                        <div className={classes.info + " markdown-body"}>
+                            <ReactMarkdown source={this.props.topic.content} />
+                        </div> : ""}
                     <br />
                     <Reply topic={this.props.id} />
                 </Grid>

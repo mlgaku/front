@@ -22,11 +22,14 @@ const mapDispatchToProps = (dispatch) => ({
 
 const styles = theme => ({
     a: {
-        color: "black",
+        color: "#828282",
         textDecoration: "none",
     },
     div: {
         display: "inline-block",
+    },
+    msg: {
+        flexGrow: "1",
     },
     menu: {
         marginTop: "35px",
@@ -101,13 +104,16 @@ class Notice extends Component {
                             case 1: // 回复
                                 return (
                                     <MenuItem key={x.id} className={classes.item}>
-                                        <div>{x.user} 回复了你的主题 <Link to={`/topic/${x.topic_id}`} className={classes.a}>{x.topic_title}</Link></div>
+                                        <div className={classes.msg}>{x.user} 回复了你的主题 <Link to={`/topic/${x.topic_id}`} className={classes.a}>{x.topic_title}</Link></div>
                                         <IconButton aria-label="Delete" onClick={() => this.removeNotice(x.id)}><DeleteIcon /></IconButton>
                                     </MenuItem>
                                 )
                             case 2: // At
                                 return (
-                                    <span>at</span>
+                                    <MenuItem key={x.id} className={classes.item}>
+                                        <div className={classes.msg}>{x.user} 在主题 <Link to={`/topic/${x.topic_id}`} className={classes.a}>{x.topic_title}</Link> 中 At 了你</div>
+                                        <IconButton aria-label="Delete" onClick={() => this.removeNotice(x.id)}><DeleteIcon /></IconButton>
+                                    </MenuItem>
                                 )
                         }
                     })}

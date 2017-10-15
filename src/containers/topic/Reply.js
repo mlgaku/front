@@ -1,7 +1,9 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
+import {findDOMNode} from "react-dom"
 
-import {Link} from "react-router-dom"
+import {Link, Redirect} from "react-router-dom"
+
 import ReactMarkdown from "react-markdown"
 import {Button, Avatar, Snackbar, withStyles} from "material-ui"
 
@@ -61,6 +63,8 @@ class Reply extends Component {
         msg: "",
         // 内容
         content: "",
+        // 重定向
+        redirect: "",
     }
 
     // 组件装载
@@ -78,8 +82,35 @@ class Reply extends Component {
         this.props.submit(this.props.topic, this.state.content)
     }
 
+    // 重定向
+    redirect(uri) {
+        this.setState({redirect: uri})
+    }
+
+    // 高亮 At
+    highAt(r) {
+        const dom = findDOMNode(r)
+        const that = this
+
+        if (dom) {
+            dom.innerHTML = dom.innerHTML.replace(/@([a-zA-Z0-9]+)/, "@<at style='color:#828282; cursor:pointer'>$1</at>")
+            for (let x of dom.querySelectorAll("at")) {
+                x.onclick = function () {
+                    that.redirect(`/user/${this.innerHTML}`)
+                }
+            }
+        }
+    }
+
     render() {
         const classes = this.props.classes
+
+        // 重定向
+        if (this.state.redirect !== "") {
+            const {redirect} = this.state
+            this.state.redirect = ""
+            return <Redirect to={redirect} />
+        }
 
         return (
             <div className={classes.root}>
@@ -88,8 +119,8 @@ class Reply extends Component {
                         <div key={x.id} className={classes.item}>
                             <Avatar className={classes.avatar}>{x.user.name}</Avatar>
                             <div>
-                                <Link to={`/user/${x.user.name}`} className={classes.link}  >{x.user.name}</Link>
-                                <ReactMarkdown source={x.content} className={classes.content} />
+                                <Link to={`/user/${x.user.name}`} className={classes.link}>{x.user.name}</Link>
+                                <ReactMarkdown source={x.content} className={classes.content} ref={r => this.highAt(r)} />
                             </div>
                         </div>
                     ))}
