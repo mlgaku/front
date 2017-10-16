@@ -27,7 +27,7 @@ const store = createStore(combineReducers({
     routerMiddleware(History)
 ))
 
-new Channel("127.0.0.1:8080", store)
+new Channel("api.maile.co", store)
 store.dispatch(connect())
 
 const history = syncHistoryWithStore(History, store)

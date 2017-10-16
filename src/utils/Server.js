@@ -1,6 +1,6 @@
 class Server {
     constructor(addr, dispatcher) {
-        this.websocket = new WebSocket(`ws://${addr}/api`)
+        this.websocket = new WebSocket(`wss://${addr}/stream`)
         this.websocket.onopen = (e) => dispatcher("open")
         this.websocket.onclose = (e) => dispatcher("close")
         this.websocket.onmessage = (e) => dispatcher("message", e.data)
